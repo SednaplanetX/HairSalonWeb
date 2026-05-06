@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Tu - Book Appointment</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body style="background-color: peachpuff;">
+  <%- include('partials/header') %>
+  <section class="container" id="booking">
+    <h2 class="section-title">Book Your Appointment</h2>
+    <form class="booking-form" action="/appointments/new" method="post">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+      <div class="form-group">
+        <label for="style">Select Style</label>
+        <select id="style" name="style" required>
+          <option value="">Choose a style...</option>
+          <option value="modern-bob">Modern Bob - $45</option>
+          <option value="beachy-waves">Beachy Waves - $55</option>
+          <option value="updo">Elegant Updo - $65</option>
+          <option value="undercut">Undercut Design - $50</option>
+          <option value="fade">Low-Taper Fade - $30</option>
+          <option value="fringe">Messy Fringe - $70</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date" name="date" required />
+      </div>
+      <div class="form-group">
+        <label for="time">Preferred Time</label>
+        <input type="time" id="time" name="time" required />
+      </div>
+      <div class="form-group">
+        <label for="notes">Special Requests</label>
+        <textarea id="notes" name="notes"></textarea>
+      </div>
+      <button type="submit" class="btn">Confirm Booking</button>
+    </form>
+  </section>
+  <%- include('partials/footer') %>
+</body>
+</html>

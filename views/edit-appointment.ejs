@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Tu - Edit Appointment</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="peachpuff">
+  <%- include('partials/header') %>
+  <section class="container">
+    <h2 class="section-title">Edit Booking</h2>
+    <div class="booking-form">
+      <% if (error) { %>
+        <p class="error-message"><%= error %></p>
+      <% } %>
+      <form action="/appointments/edit/<%= appointment.appointment_id %>" method="post">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" value="<%= appointment.name %>" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="<%= appointment.email %>" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" value="<%= appointment.phone %>" required />
+        </div>
+        <div class="form-group">
+          <label for="style">Select Style</label>
+          <select id="style" name="style" required>
+            <option value="">Choose a style...</option>
+            <option value="modern-bob" <%= appointment.style === 'modern-bob' ? 'selected' : '' %>>Modern Bob - $45</option>
+            <option value="beachy-waves" <%= appointment.style === 'beachy-waves' ? 'selected' : '' %>>Beachy Waves - $55</option>
+            <option value="updo" <%= appointment.style === 'updo' ? 'selected' : '' %>>Elegant Updo - $65</option>
+            <option value="undercut" <%= appointment.style === 'undercut' ? 'selected' : '' %>>Undercut Design - $50</option>
+            <option value="fade" <%= appointment.style === 'fade' ? 'selected' : '' %>>Low-Taper Fade - $30</option>
+            <option value="fringe" <%= appointment.style === 'fringe' ? 'selected' : '' %>>Messy Fringe - $70</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date" name="date" value="<%= appointment.preferred_date %>" required />
+        </div>
+        <div class="form-group">
+          <label for="time">Preferred Time</label>
+          <input type="time" id="time" name="time" value="<%= appointment.preferred_time %>" required />
+        </div>
+        <div class="form-group">
+          <label for="notes">Special Requests</label>
+          <textarea id="notes" name="notes"><%= appointment.notes %></textarea>
+        </div>
+        <button type="submit" class="btn">Update Booking</button>
+      </form>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+</body>
+</html>

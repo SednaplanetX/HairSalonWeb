@@ -1,0 +1,17 @@
+{
+  "name": "salon-tu-booking",
+  "version": "1.0.0",
+  "description": "Salon Tu appointment booking with authentication and appointment CRUD.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^17.4.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.4",
+    "mysql2": "^3.6.0"
+  }
+}

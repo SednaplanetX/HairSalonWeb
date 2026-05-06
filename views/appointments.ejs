@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Tu - Appointments</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+  <section class="container">
+    <h2 class="section-title">Your Appointments</h2>
+    <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
+    <div class="booking-form" style="margin-bottom: 2rem;">
+      <form action="/appointments" method="get">
+        <div class="form-group">
+          <label for="q">Search appointments</label>
+          <input type="text" id="q" name="q" value="<%= query %>" placeholder="e.g. Jane, updo, 2026-05-10" />
+        </div>
+        <button type="submit" class="btn">Search</button>
+        <% if (query) { %>
+          <a href="/appointments" class="btn btn-clear">Clear Search</a>
+        <% } %>
+      </form>
+    </div>
+    <div class="table-wrapper">
+      <% if (appointments.length === 0) { %>
+        <p>No appointments found. <a href="/appointments/new">Add one now</a>.</p>
+      <% } else { %>
+        <table class="appointments-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Style</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Requests/Notes</th>
+              <th>Edit/Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% appointments.forEach((appointment) => {
+              const dateObj = new Date(appointment.preferred_date);
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              const formattedDate = dateObj.toLocaleDateString('en-US', options);
+            %>
+              <tr>
+                <td><%= appointment.name %></td>
+                <td><%= appointment.email %></td>
+                <td><%= appointment.phone %></td>
+                <td><%= appointment.style %></td>
+                <td><%= formattedDate %></td>
+                <td><%= appointment.preferred_time %></td>
+                <td><%= appointment.notes || '—' %></td>
+                <td>
+                  <a class="action-link" href="/appointments/edit/<%= appointment.appointment_id %>">Edit</a>
+                  <form class="inline-form delete-form" action="/appointments/delete/<%= appointment.appointment_id %>" method="post">
+                    <button type="submit" class="btn btn-sm">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </div>
+  </section>
+  <%- include('partials/footer') %>
+  <script src="/js/app.js"></script>
+</body>
+</html>
